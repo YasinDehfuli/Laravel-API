@@ -29,14 +29,16 @@ class PostController extends ApiController
     {
 //        dd($request->all());
 
-        $post = Post::creating([
+        $post = Post::create([
             'title' => $request->title,
             'body' => $request->body,
             'image' => $request->image,
             'user_id' => $request->user_id,
         ]);
 
-        return $this->successResponse($post, 'Send Successfully', 201);
+        return \response()->json([
+            'data' => $post
+        ]);
 
     }
 
