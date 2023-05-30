@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class PostController extends ApiController
 {
     //
-    public function index(){
+    public function index()
+    {
 //        return [
 //            'name' => 'yasindehfuli.ir',
 //        ];
@@ -19,12 +20,24 @@ class PostController extends ApiController
 //           'data'=>Post::all(),
 //       ] ,404);
 
-        return $this->errorResponse('Error Found!',404);
+        return $this->successResponse(Post::all(), 200);
+
 //        return $this->successResponse(Post::all(),'SuccessJob!',200);
-
-
     }
 
+    public function store(Request $request)
+    {
+//        dd($request->all());
 
+        $post = Post::creating([
+            'title' => $request->title,
+            'body' => $request->body,
+            'image' => $request->image,
+            'user_id' => $request->user_id,
+        ]);
+
+        return $this->successResponse($post, 'Send Successfully', 201);
+
+    }
 
 }
